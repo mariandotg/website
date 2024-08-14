@@ -1,0 +1,231 @@
+---
+import { SEO } from 'astro-seo'
+import { RESUME_DATA } from '../../data/resume.data'
+
+interface Props {
+  title: string
+}
+
+const locale = Astro.currentLocale || 'en'
+const DATA = RESUME_DATA[locale]
+---
+
+<!doctype html>
+<html lang={locale}>
+	<head>
+		<script is:inline>
+			const getTheme = () => {
+				if (typeof localStorage !== 'undefined') {
+					const storedTheme = localStorage.getItem('theme');
+					if (storedTheme) {
+						return storedTheme;
+					}
+				}
+				if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			};
+
+			function applyTheme(toggle = false, firstTime = true) {
+				let theme = getTheme();
+				if (toggle) {
+					theme = theme === 'dark' ? 'light' : 'dark';
+				}
+				console.log("test apply theme")
+				localStorage.setItem('theme', theme);
+				
+				// if(firstTime) {
+				// 	if (theme === 'dark') {
+				// 		document.documentElement.classList.add('dark')
+				// 	} else {
+				// 		document.documentElement.classList.remove('dark')
+				// 	}
+				// } else {
+
+					// document.startViewTransition(() => {
+						console.log('view transition')
+						if (theme === 'dark') {
+							document.documentElement.classList.add('dark')
+						} else {
+							document.documentElement.classList.remove('dark')
+						}
+					// })
+				// }
+			};
+
+			document.addEventListener('DOMContentLoaded', () => {
+				const themeToggle = document.getElementById('themeToggler');
+				if (!themeToggle) {
+					throw new Error('Theme toggle button not found');
+				}
+				themeToggle.addEventListener("click", () => applyTheme(true, false));
+			})
+			applyTheme(false, true);
+		</script>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<SEO
+			title={DATA.name}
+			description={DATA.about}
+			openGraph={{
+				basic: {
+					title: DATA.name,
+					type: DATA.about,
+					image: "https://res.cloudinary.com/dgsft8yky/image/upload/v1704451206/home-metadata-image_yjyydi.jpg",
+				}
+			}}
+			twitter={{
+				creator: "@mariandotg"
+			}}
+			extend={{
+				// extending the default link tags
+				link: [{ rel: "icon", href: "/favicon.ico" }],
+				// extending the default meta tags
+				meta: [
+				{
+					name: "twitter:image",
+					content: "https://res.cloudinary.com/dgsft8yky/image/upload/v1704451206/home-metadata-image_yjyydi.jpg",
+				},
+				{ name: "twitter:title", content: DATA.name },
+				{ name: "twitter:description", content: DATA.about },
+				],
+			}}
+		/>
+		<!-- Google tag (gtag.js) -->
+		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-M6PHEWNC7H"></script>
+		<script type="text/partytown">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-M6PHEWNC7H');
+		</script>
+		<link rel="sitemap" href="/sitemap-index.xml" />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	@layer base {
+	:root {
+		--background: 0 0% 85%;
+		--foreground: 224 71.4% 4.1%;
+
+		--card: 0 0% 90%;
+		--card-foreground: 224 71.4% 4.1%;
+
+		--popover: 0 0% 100%;
+		--popover-foreground: 224 71.4% 4.1%;
+
+		--primary: 220.9 39.3% 11%;
+		--primary-foreground: 210 20% 98%;
+
+		--secondary: 220 14.3% 95.9%;
+		--secondary-foreground: 220.9 39.3% 11%;
+
+		--muted: 220 14.3% 95.9%;
+		--muted-foreground: 220 8.9% 46.1%;
+
+		--accent: 220 14.3% 95.9%;
+		--accent-foreground: 220.9 39.3% 11%;
+
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 210 20% 98%;
+
+		--border: 220 13% 91%;
+		--input: 220 13% 91%;
+		--ring: 224 71.4% 4.1%;
+
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: 240 41% 8%;
+		--foreground: 210 20% 98%;
+
+		--card: 240 41% 6%;
+		--card-foreground: 210 20% 98%;
+
+		--popover: 224 71.4% 4.1%;
+		--popover-foreground: 210 20% 98%;
+
+		--primary: 210 20% 98%;
+		--primary-foreground: 220.9 39.3% 11%;
+
+		--secondary: 215 27.9% 16.9%;
+		--secondary-foreground: 210 20% 98%;
+
+		--muted: 215 27.9% 16.9%;
+		--muted-foreground: 217.9 10.6% 64.9%;
+
+		--accent: 215 27.9% 16.9%;
+		--accent-foreground: 210 20% 98%;
+
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 210 20% 98%;
+
+		--border: 215 27.9% 16.9%;
+		--input: 215 27.9% 16.9%;
+		--ring: 216 12.2% 83.9%;
+	}
+	}
+
+	@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground h-full;
+	}
+	html {
+		@apply h-full;
+	}
+	}
+
+	.print-force-new-page {
+	page-break-before: always;
+	}
+
+	@font-face {
+	font-family: 'IBM Plex Sans';
+	src: url('/fonts/ibmplexsans.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	}
+
+	@font-face {
+	font-family: 'IBM Plex Mono';
+	src: url('/fonts/ibmplexmono.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	}
+
+	::view-transition-group(root) {
+		animation-duration: 0.25s;
+	}
+
+	::view-transition-new(root) {
+		animation-name: reveal;
+	}
+
+	::view-transition-old(root) {
+		animation: none;
+	}
+
+	@keyframes reveal {
+		from {
+			clip-path: polygon(50% 50%, 50% 50%, 50% 50%);
+		}
+		to {
+			clip-path: polygon(50% -200%, -100% 200%, 200% 200%);
+		}
+	}
+</style>

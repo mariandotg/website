@@ -1,0 +1,14 @@
+---
+import { DICTIONARIES } from '../../../data/dictionaries'
+import { RESUME_DATA } from '../../../data/resume.data'
+
+const locale = Astro.currentLocale || 'en'
+const DATA = RESUME_DATA[locale]
+const DICTIONARY = DICTIONARIES[locale]
+---
+<section>
+    <h2 class="text-lg font-bold">{DICTIONARY.ABOUT}</h2>
+    <p class="text-pretty text-muted-foreground print:text-[12px]">
+        {DATA.summary}
+    </p>
+</section>
