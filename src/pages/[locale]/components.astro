@@ -1,0 +1,55 @@
+---
+import { JobCard, type Work } from '@/components/ui/JobCard'
+import Layout from '@/components/layouts/Layout.astro'
+import Newsletter from '@/components/ui/Newsletter'
+import { staticLocalePaths } from '@/data/locales'
+
+export function getStaticPaths() {
+  return staticLocalePaths
+}
+
+const workSample = {
+  company: 'Stefanini',
+  title: 'Full Stack Developer',
+  start: '2024',
+  end: null,
+  description: 'I work on RCI (Renault Credit International) project',
+  responsabilities: [
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ultrices nisl sem, et tincidunt tellus euismod efficitur. Sed a tristique dolor.',
+    'Pellentesque at eleifend mi. Vestibulum ornare augue nec massa auctor fermentum.',
+    'Cras ipsum tortor, accumsan elementum ornare ac, pharetra id metus.',
+  ],
+  techStack: [
+    {
+      variant: 'default',
+      label: 'Java',
+    },
+    {
+      variant: 'secondary',
+      label: 'Spring Boot',
+    },
+    {
+      variant: 'secondary',
+      label: 'AngularJS',
+    },
+    {
+      variant: 'secondary',
+      label: 'SQLServer',
+    },
+  ],
+} satisfies Work
+---
+
+<Layout title="Welcome to Astro.">
+	<main class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16 gap-4 flex flex-col md:grid-cols-2 md:grid ">
+		<h1 class="col-span-2">Design system - Components</h1>
+        <section class="flex flex-col gap-y-2">
+            <h2>Newsletter</h2>
+            <Newsletter client:load />
+        </section>
+        <section class="flex flex-col gap-y-2">
+            <h2>JobCard</h2>
+			<JobCard work={workSample}></JobCard>
+        </section>
+	</main>
+</Layout>
