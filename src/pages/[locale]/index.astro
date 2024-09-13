@@ -3,11 +3,8 @@ import Layout from '../../components/layouts/Layout.astro'
 import { RESUME_DATA } from '../../data/resume.data'
 import { staticLocalePaths } from '../../data/locales'
 import { DICTIONARIES } from '../../data/dictionaries'
-import About from '../../components/ui/sections/About.astro'
-import WorkExp from '../../components/ui/sections/WorkExp.astro'
-import Skills from '../../components/ui/sections/Skills.astro'
-import Projects from '../../components/ui/sections/Projects.astro'
-import Social from '../../components/ui/sections/Social.astro'
+
+import Newsletter from '@/components/ui/Newsletter'
 
 export function getStaticPaths() {
   return staticLocalePaths
@@ -25,8 +22,9 @@ const VERSION = process.env.npm_package_version
 		<section>
 			<h2>Sobre mi</h2>
 		</section>
-		<section>
+		<section class="space-y-4">
 			<h2>Newsletter</h2>
+			<Newsletter client:load />
 		</section>
 		<section>
 			<h2>Proyectos</h2>
