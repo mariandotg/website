@@ -5,6 +5,8 @@ import { staticLocalePaths } from '../../data/locales'
 import { DICTIONARIES } from '../../data/dictionaries'
 
 import Newsletter from '@/components/ui/Newsletter'
+import { projects } from '@/data/data'
+import { ProjectCard } from '@/components/ui/ProjectCard'
 
 export function getStaticPaths() {
   return staticLocalePaths
@@ -28,6 +30,12 @@ const VERSION = process.env.npm_package_version
 		</section>
 		<section>
 			<h2>Proyectos</h2>
+			<ul class="flex flex-col gap-4">
+				{projects.map((project) => <li>
+					<ProjectCard project={project} />
+					</li>
+				)}
+			</ul>
 		</section>
 		<section>
 			<h2>Notas</h2>
