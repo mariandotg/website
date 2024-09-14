@@ -1,8 +1,11 @@
 ---
 import { JobCard, type Work } from '@/components/ui/JobCard'
+import { NoteCard } from '@/components/ui/NoteCard'
 import Layout from '@/components/layouts/Layout.astro'
 import Newsletter from '@/components/ui/Newsletter'
 import { staticLocalePaths } from '@/data/locales'
+import { ProjectCard } from '@/components/ui/ProjectCard'
+import type { Project } from '@/components/ui/ProjectCard'
 
 export function getStaticPaths() {
   return staticLocalePaths
@@ -38,6 +41,37 @@ const workSample = {
     },
   ],
 } satisfies Work
+
+const noteSample = {
+  title: 'Test note',
+  description: 'Test note description for sampling purposes',
+  date: new Date(),
+}
+
+const projectSample = {
+  title: 'personal website',
+  description:
+    'Pellentesque at eleifend mi. Vestibulum ornare augue nec massa auctor fermentum.',
+  faviconUrl: 'https://www.youtube.com',
+  techStack: [
+    {
+      variant: 'default',
+      label: 'Java',
+    },
+    {
+      variant: 'secondary',
+      label: 'Spring Boot',
+    },
+    {
+      variant: 'secondary',
+      label: 'AngularJS',
+    },
+    {
+      variant: 'secondary',
+      label: 'SQLServer',
+    },
+  ],
+} satisfies Project
 ---
 
 <Layout title="Welcome to Astro.">
@@ -50,6 +84,14 @@ const workSample = {
         <section class="flex flex-col gap-y-2">
             <h2>JobCard</h2>
 			<JobCard work={workSample}></JobCard>
+        </section>
+        <section class="flex flex-col gap-y-2">
+            <h2>NoteCard</h2>
+            <NoteCard note={noteSample}></NoteCard>
+        </section>
+        <section class="flex flex-col gap-y-2">
+            <h2>ProjectCard</h2>
+            <ProjectCard project={projectSample}></ProjectCard>
         </section>
 	</main>
 </Layout>
