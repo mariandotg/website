@@ -1,4 +1,5 @@
 import type { Work } from '@/components/ui/JobCard'
+import type { Note } from '@/components/ui/NoteCard'
 import type { Project } from '@/components/ui/ProjectCard'
 
 const workExperience = [
@@ -84,6 +85,103 @@ const projects = [
       },
     ],
   },
+  {
+    faviconUrl: 'https://marianoguillaume.com/en/',
+    title: 'personal website',
+    description: 'personal website',
+    techStack: [
+      {
+        variant: 'default',
+        label: 'React/Next.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Node.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Java',
+      },
+    ],
+  },
+  {
+    faviconUrl: 'https://marianoguillaume.com/en/',
+    title: 'personal website',
+    description: 'personal website',
+    techStack: [
+      {
+        variant: 'default',
+        label: 'React/Next.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Node.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Java',
+      },
+    ],
+  },
+  {
+    faviconUrl: 'https://marianoguillaume.com/en/',
+    title: 'personal website',
+    description: 'personal website',
+    techStack: [
+      {
+        variant: 'default',
+        label: 'React/Next.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Node.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Java',
+      },
+    ],
+  },
+  {
+    faviconUrl: 'https://marianoguillaume.com/en/',
+    title: 'personal website',
+    description: 'personal website',
+    techStack: [
+      {
+        variant: 'default',
+        label: 'React/Next.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Node.js',
+      },
+      {
+        variant: 'secondary',
+        label: 'Java',
+      },
+    ],
+  },
 ] as Project[]
 
-export { workExperience, projects }
+const notes = [
+  {
+    title: 'Test note',
+    description: 'Test note description for sampling purposes',
+    date: new Date(),
+    slug: `./test`,
+  },
+  {
+    title: '222 note',
+    description: '2Test note description for sampling purposes',
+    date: new Date(),
+    slug: `./test2`,
+  },
+  {
+    title: '333 note',
+    description: '3Test note description for sampling purposes',
+    date: new Date(),
+    slug: `./test3`,
+  },
+] as Note[]
+
+export { workExperience, projects, notes }

@@ -42,12 +42,6 @@ const workSample = {
   ],
 } satisfies Work
 
-const noteSample = {
-  title: 'Test note',
-  description: 'Test note description for sampling purposes',
-  date: new Date(),
-}
-
 const projectSample = {
   title: 'personal website',
   description:
@@ -72,6 +66,13 @@ const projectSample = {
     },
   ],
 } satisfies Project
+
+const noteSample = {
+  title: 'Test note',
+  description: 'Test note description for sampling purposes',
+  date: new Date(),
+  slug: `./test`,
+}
 ---
 
 <Layout title="Welcome to Astro.">
@@ -83,15 +84,15 @@ const projectSample = {
         </section>
         <section class="flex flex-col gap-y-2">
             <h2>JobCard</h2>
-			<JobCard work={workSample}></JobCard>
-        </section>
-        <section class="flex flex-col gap-y-2">
-            <h2>NoteCard</h2>
-            <NoteCard note={noteSample}></NoteCard>
+			      <JobCard work={workSample} />
         </section>
         <section class="flex flex-col gap-y-2">
             <h2>ProjectCard</h2>
-            <ProjectCard project={projectSample}></ProjectCard>
+            <ProjectCard project={projectSample} />
+        </section>
+        <section class="flex flex-col gap-y-2">
+            <h2>NoteCard</h2>
+            <NoteCard note={noteSample} />
         </section>
 	</main>
 </Layout>

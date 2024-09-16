@@ -22,11 +22,7 @@ interface Props {
 
 const ProjectCard: React.FunctionComponent<Props> = ({ project }) => {
   return (
-    /**
-     * hover card styles:
-     * transition-all hover:bg-accent/25 hover:cursor-pointer
-     */
-    <Card className="bg-transparent w-96 transition-all hover:bg-accent/25 hover:cursor-pointer">
+    <Card className="bg-transparent max-w-96" hoverable>
       <CardHeader>
         <CardTitle className="content-center flex gap-x-2">
           <FaviconDisplay url={project.faviconUrl} />
