@@ -8,6 +8,12 @@ import {
   CardContent,
 } from '../design-system/Card'
 import FaviconDisplay from './FaviconDisplay'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../design-system/tooltip'
 
 export interface Project {
   faviconUrl: string
@@ -36,6 +42,14 @@ const ProjectCard: React.FunctionComponent<Props> = ({ project }) => {
               </Badge>
             </li>
           ))}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger className="w-4">test</TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>Add to library</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </ul>
       </CardHeader>
       <CardContent>

@@ -1,0 +1,44 @@
+---
+import {
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription,
+  Card,
+} from '../design-system/Card'
+import FaviconDisplay from './FaviconDisplay'
+import { Badge } from '../design-system/Badge'
+import TechsToolTip from './TechsToolTip'
+import type { Project } from './ProjectCard'
+
+interface Props {
+  project: Project
+}
+
+const { project } = Astro.props
+
+const techsToDisplay = project.techStack.slice(0, 3)
+const restTechs = project.techStack.slice(3)
+---
+
+<Card className="bg-transparent max-w-96 group " hoverable>
+    <CardHeader>
+      <CardTitle className="content-center flex gap-x-2">
+        <FaviconDisplay url={project.faviconUrl} />
+        {project.title}
+      </CardTitle>
+      <ul class="flex gap-2 flex-wrap">
+        {techsToDisplay.map((tech) => (
+          <li>
+            <Badge variant={tech.variant} className="whitespace-nowrap">
+              {tech.label}
+            </Badge>
+          </li>
+        ))}
+        {restTechs.length > 0 && <TechsToolTip techs={restTechs} client:load/>}
+      </ul>
+    </CardHeader>
+    <CardContent>
+      <CardDescription>{project.description}</CardDescription>
+    </CardContent>
+  </Card>

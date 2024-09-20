@@ -83,6 +83,18 @@ const projects = [
         variant: 'secondary',
         label: 'Java',
       },
+      {
+        variant: 'secondary',
+        label: 'TEST',
+      },
+      {
+        variant: 'secondary',
+        label: 'TEST43',
+      },
+      {
+        variant: 'secondary',
+        label: 'TEST23',
+      },
     ],
   },
   {

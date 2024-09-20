@@ -7,8 +7,9 @@ import { DICTIONARIES } from '../../data/dictionaries'
 import Newsletter from '@/components/ui/Newsletter'
 import { Separator } from '@/components/design-system/Separator'
 import { notes, projects } from '@/data/data'
-import { ProjectCard } from '@/components/ui/ProjectCard'
+import ProjectCard from '@/components/ui/ProjectCard.astro'
 import { NoteCard } from '@/components/ui/NoteCard'
+import { Card } from '@/components/design-system/Card'
 
 export function getStaticPaths() {
   return staticLocalePaths
@@ -37,6 +38,10 @@ const VERSION = process.env.npm_package_version
 					<ProjectCard project={project} />
 					</li>
 				)}
+				<!-- {projects.length % 2 !== 0 && <li>
+					<Card className="bg-red-500 w-full relative h-full overflow-hidden" ><img src="/composition.png" class="absolute"/></Card>
+					</li>
+				} -->
 			</ul>
 		</section>
 		<section>
