@@ -6,10 +6,11 @@ import { Slot } from '@radix-ui/react-slot'
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean
   hoverable?: boolean
+  stripped?: boolean
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, asChild, hoverable, ...props }, ref) => {
+  ({ className, asChild, hoverable, stripped, ...props }, ref) => {
     const Comp = asChild ? Slot : 'div'
 
     return (
@@ -20,6 +21,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           className,
           hoverable &&
             'transition-all hover:bg-accent/25 hover:cursor-pointer group',
+          stripped && 'bg-muted/5 hover:bg-accent/25',
         )}
         {...props}
       />
