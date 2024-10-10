@@ -11,19 +11,24 @@ import useDate from '@/hooks/useDate'
 export interface Note {
   title: string
   description: string
-  date: Date
+  date: string
   slug: string
 }
 
 interface Props {
   note: Note
+  stripped?: boolean
 }
 
-const NoteCard: React.FunctionComponent<Props> = ({ note }) => {
-  const { long } = useDate(note.date)
+const NoteCard: React.FunctionComponent<Props> = ({ note, stripped }) => {
+  const { long } = useDate(new Date(note.date))
   return (
-    <Card className="bg-transparent border-none rounded-none" hoverable>
-      <a href={note.slug}>
+    <Card
+      className="bg-transparent border-none rounded-none"
+      stripped={stripped}
+      hoverable
+    >
+      <a href={`notes/${note.slug}`}>
         <CardHeader>
           <CardTitle className="w-full flex flex-wrap justify-between">
             {note.title}
