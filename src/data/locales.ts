@@ -28,7 +28,7 @@ const localesArray = KNOWN_LANGUAGES.reduce((acc, curr) => {
   return [...acc, curr.locale]
 }, [] as string[])
 
-const defaultLocale = `${localesArray[0]}/`
+const defaultLocale = localesArray[0]
 
 export {
   KNOWN_LANGUAGES,
