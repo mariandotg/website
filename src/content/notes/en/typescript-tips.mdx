@@ -1,0 +1,82 @@
+---
+title: TypeScript Tips and Tricks
+description: Essential TypeScript patterns and best practices for better type safety
+date: 2024-03-20T11:30:00.000Z
+slug: typescript-tips
+locale: en
+---
+
+# TypeScript Tips and Tricks
+
+TypeScript is a powerful tool for building robust applications. Here are some essential tips and patterns that can help you write better TypeScript code.
+
+## Type Inference
+
+TypeScript's type inference is powerful. Let it do the work when possible:
+
+```typescript
+// Let TypeScript infer the type
+const numbers = [1, 2, 3]; // number[]
+const first = numbers[0]; // number
+```
+
+## Utility Types
+
+TypeScript provides several utility types that can make your life easier:
+
+```typescript
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+// Make all properties optional
+type PartialUser = Partial<User>;
+
+// Pick specific properties
+type UserName = Pick<User, 'name'>;
+
+// Omit specific properties
+type UserWithoutEmail = Omit<User, 'email'>;
+```
+
+## Type Guards
+
+Use type guards to narrow down types:
+
+```typescript
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
+function processValue(value: unknown) {
+  if (isString(value)) {
+    // value is now typed as string
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+## Generics
+
+Generics make your code more reusable:
+
+```typescript
+function firstElement<T>(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+const num = firstElement([1, 2, 3]); // number
+const str = firstElement(['a', 'b', 'c']); // string
+```
+
+## Best Practices
+
+1. Always use strict mode
+2. Prefer interfaces for public APIs
+3. Use type aliases for unions and intersections
+4. Leverage the compiler's type inference
+5. Use readonly when appropriate
+
+Remember: TypeScript is a tool to help you write better code. Use it to catch errors early and provide better documentation through types. 

@@ -2,6 +2,7 @@
 import type { Note } from '@/components/ui/NoteCard'
 import { KNOWN_LANGUAGES } from '@/data/locales'
 import Layout from '@/components/layouts/Layout.astro'
+import { notes } from '@/data/data'
 
 interface StaticLocalizedNotePath {
   params: {
@@ -14,26 +15,17 @@ interface StaticLocalizedNotePath {
 }
 
 export async function getStaticPaths() {
-  const paths = await Promise.all(
-    KNOWN_LANGUAGES.map(async (language) => {
-      const notesResponse = await fetch(
-        `https://us-central1-glassy-mystery-432822-s6.cloudfunctions.net/blog-api/posts?locale=${language.locale}`,
-        { headers: { Authorization: 'Bearer asd' } },
-      )
-
-      const notesData = (await notesResponse.json()) as Note[]
-
-      return notesData.map((note) => ({
-        params: {
-          locale: language.locale,
-          slug: note.slug,
-        },
-        props: {
-          note: note,
-        },
-      }))
-    }),
-  )
+  const paths = KNOWN_LANGUAGES.map((language) => {
+    return notes.map((note) => ({
+      params: {
+        locale: language.locale,
+        slug: note.slug,
+      },
+      props: {
+        note: note,
+      },
+    }))
+  })
 
   return paths.flat()
 }

@@ -8,7 +8,8 @@ import Newsletter from '@/components/ui/Newsletter'
 import { Separator } from '@/components/design-system/Separator'
 import { notes, projects } from '@/data/data'
 import ProjectCard from '@/components/ui/ProjectCard.astro'
-import { NoteCard, type Note } from '@/components/ui/NoteCard'
+import { NoteCard } from '@/components/ui/NoteCard'
+import { getCollection } from 'astro:content'
 
 export function getStaticPaths() {
   return staticLocalePaths
@@ -19,23 +20,33 @@ const DATA = RESUME_DATA[locale]
 const DICTIONARY = DICTIONARIES[locale]
 const VERSION = process.env.npm_package_version
 
-const notesResponse = await fetch(
-  `https://us-central1-glassy-mystery-432822-s6.cloudfunctions.net/blog-api/posts?locale=${locale}`,
-  { headers: { Authorization: 'Bearer asd' } },
-)
+const blogCollectionName = locale === 'en' ? 'blogEN' : 'blogES'
+const allBlogPosts = await getCollection(blogCollectionName)
 
-const notesData = (await notesResponse.json()) as Note[]
-console.log(notesData)
+const notesCollectionName = locale === 'en' ? 'notesEN' : 'notesES'
+const allNotesPosts = await getCollection(notesCollectionName)
+
+const projectsCollectionName = locale === 'en' ? 'projectsEN' : 'projectsES'
+const allProjectsPosts = await getCollection(projectsCollectionName)
+
+console.log(allBlogPosts)
+console.log(allNotesPosts)
+console.log(allProjectsPosts)
 ---
 
 <Layout title="Welcome to Astro.">
 	<main class="container relative mx-auto scroll-my-12 overflow-auto p-4 max-w-[800px] space-y-4">
-		<!-- {Astro.currentLocale} -->
 		<h1 class="text-2xl">Mariano Guillaume - Backend Developer</h1>
 		<section>
 			<h2 class="text-xl">Sobre mi</h2>
 			<p>
-				- 
+				{allBlogPosts.map((post) => <a href={post.data.slug}>{post.data.title} + {post.data.locale}</a>)}
+			</p>
+			<p>
+				{allNotesPosts.map((post) => <a href={post.data.slug}>{post.data.title} + {post.data.locale}</a>)}
+			</p>
+			<p>
+				{allProjectsPosts.map((post) => <a href={post.data.slug}>{post.data.title} + {post.data.locale}</a>)}
 			</p>
 		</section>
 		<section class="flex flex-col gap-y-2">
@@ -45,16 +56,12 @@ console.log(notesData)
 					<ProjectCard project={project} />
 					</li>
 				)}
-				<!-- {projects.length % 2 !== 0 && <li>
-					<Card className="bg-red-500 w-full relative h-full overflow-hidden" ><img src="/composition.png" class="absolute"/></Card>
-					</li>
-				} -->
 			</ul>
 		</section>
 		<section class="flex flex-col gap-y-2">
 			<h2 class="text-xl">Notas</h2>
 			<ul class="flex flex-col gap-0">
-				{notesData.map((note, index) => <><li class="">
+				{notes.map((note, index) => <><li class="">
 					<NoteCard note={note} stripped={index % 2 != 0}/>
 					</li>{index !== notes.length-1 && <Separator />}</>
 				)}
@@ -64,9 +71,6 @@ console.log(notesData)
 			<h2 class="text-xl w-full">Newsletter</h2>
 			<Newsletter client:load />
 		</section>
-		<!-- <section>
-			<h2>Recetas</h2>
-		</section> -->
 	</main>
 	<footer class="flex justify-center text-gray-600 pb-20">
 		Online Open CV v.{VERSION} made by Mariano Guillaume
