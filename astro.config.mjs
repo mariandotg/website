@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config';
 import { defaultLocale, localesArray } from "./src/data/locales";
 import partytown from '@astrojs/partytown'
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +17,7 @@ export default defineConfig({
       defaultLocale,
       locales: localesArray
     },
-  }),],
+  }), mdx()],
   i18n: {
     defaultLocale,
     locales: localesArray,
